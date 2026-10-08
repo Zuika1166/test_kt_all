@@ -15,15 +15,15 @@ const state = {
     requestId: 0
 };
 const titles = {
-    home: "Обзор",
+    home: "Главная",
     students: "Студенты",
     teachers: "Преподаватели",
     courses: "Курсы"
 };
 const descriptions = {
-    students: "Управление данными и учебными записями студентов",
-    teachers: "Справочник сотрудников и преподавателей",
-    courses: "Каталог учебных дисциплин и ведущих преподавателей"
+    students: "Список студентов университета",
+    teachers: "Список преподавателей университета",
+    courses: "Список учебных курсов"
 };
 const statusLabels = {
     active: "Обучается",
@@ -91,7 +91,7 @@ async function request(path, options = {}) {
 }
 
 function sectionHeader(title, subtitle, action = "") {
-    return '<div class="section-head"><div><p class="eyebrow">UNIVERSITY PORTAL</p>' +
+    return '<div class="section-head"><div>' +
         "<h1>" + escapeHtml(title) + "</h1><p class='subtitle'>" + escapeHtml(subtitle) +
         "</p></div>" + action + "</div>";
 }
@@ -221,8 +221,8 @@ function renderList(payload) {
 
 async function loadHome() {
     root.innerHTML = sectionHeader(
-        "Обзор системы",
-        "Данные университета и быстрый доступ к разделам"
+        "Главная",
+        "Основная информация"
     ) + loading();
     const requestId = ++state.requestId;
     const types = ["students", "teachers", "courses"];
@@ -232,22 +232,19 @@ async function loadHome() {
     if (requestId !== state.requestId) {
         return;
     }
-    const icons = ["♙", "◈", "▧"];
-    const colors = ["purple", "blue", "mint"];
     root.innerHTML = sectionHeader(
-        "Обзор системы",
-        "Вся ключевая информация университета — в одном месте"
+        "Главная",
+        "Основная информация"
     ) + '<div class="stats">' + results.map((result, i) => {
         const count = result.status === "fulfilled" ? result.value.pagination?.total : null;
-        return '<div class="stat-card"><span class="stat-icon ' + colors[i] + '">' +
-            icons[i] + '</span><div class="stat-label">' + titles[types[i]] +
+        return '<div class="stat-card"><div class="stat-label">' + titles[types[i]] +
             '</div><div class="stat-value">' + (count ?? "—") +
             '</div><div class="stat-foot">' + (count === null ? "Нет данных от сервиса" : "Всего в базе") +
             "</div></div>";
-    }).join("") + '</div><h2 class="quick-title">Быстрый переход</h2><div class="quick-grid">' +
+    }).join("") + '</div><h2 class="quick-title">Разделы</h2><div class="quick-grid">' +
         types.map(type => '<button type="button" class="quick-card" data-nav="' +
             type + '"><span>' + titles[type] + '</span><span>→</span></button>').join("") +
-        '</div><div class="notice">Данные загружаются напрямую из University API через защищённый сервер приложения. Изменять и удалять можно только тестовые записи команды.</div>';
+        '</div><div class="notice">Данные загружаются из University API. Изменять и удалять можно только студентов своей команды.</div>';
 }
 
 async function loadList() {
@@ -285,7 +282,6 @@ function navigate(section) {
     document.querySelectorAll(".nav-link").forEach(link =>
         link.classList.toggle("active", link.dataset.nav === section)
     );
-    document.getElementById("sidebar").classList.remove("open");
     document.title = titles[section] + " — University Portal";
     history.replaceState({}, "", section === "home" ? "/" : "#" + section);
     refresh();
@@ -549,10 +545,6 @@ document.addEventListener("change", event => {
     }
     state.page = 1;
     loadList();
-});
-
-document.getElementById("menuButton").addEventListener("click", () => {
-    document.getElementById("sidebar").classList.toggle("open");
 });
 
 const initial = location.hash.substring(1);
