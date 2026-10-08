@@ -16,3 +16,5 @@ jobs:
           java-version: '21'
           cache: maven
       - run: mvn -B clean verify
+      - run: node --check src/main/resources/static/app.js
+      - run: docker build -t university-portal .
