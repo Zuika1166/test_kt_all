@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111a30">
+    <title>University Portal — учебный отдел</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+    <aside class="sidebar" id="sidebar">
+        <div class="brand"><span class="brand-icon">U</span><div><strong>University</strong><small>PORTAL</small></div></div>
+        <div class="side-label">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+        <nav class="nav" aria-label="Основное меню">
+            <button type="button" class="nav-link active" data-nav="home"><span class="nav-icon">◈</span> Обзор</button>
+            <button type="button" class="nav-link" data-nav="students"><span class="nav-icon">▤</span> Студенты</button>
+            <button type="button" class="nav-link" data-nav="teachers"><span class="nav-icon">♙</span> Преподаватели</button>
+            <button type="button" class="nav-link" data-nav="courses"><span class="nav-icon">▧</span> Курсы</button>
+        </nav>
+        <div class="sidebar-bottom">
+            <div class="sidebar-note"><span class="note-dot"></span> Учебный отдел<br><small>Единое пространство для работы с данными</small></div>
+        </div>
+    </aside>
+    <div class="workspace">
+        <header class="topbar">
+            <button class="mobile-menu icon-button" type="button" id="menuButton" aria-label="Открыть меню">☰</button>
+            <div class="breadcrumb">Учебный отдел <span>/</span> <strong id="breadcrumb">Обзор</strong></div>
+            <div class="top-right"><span class="top-pill"><span class="online-dot"></span> University Portal</span><span class="avatar" aria-hidden="true">УО</span></div>
+        </header>
+        <main class="content" id="content" tabindex="-1">
+            <div class="loading-card">Загрузка данных…</div>
+        </main>
+        <footer class="footer">University Portal <span>Информационная система учебного отдела</span></footer>
+    </div>
+</div>
+<dialog id="detailDialog" class="dialog"><div id="detailContent"></div></dialog>
+<dialog id="editorDialog" class="dialog"><div id="editorContent"></div></dialog>
+<dialog id="confirmDialog" class="dialog confirm-dialog"><div id="confirmContent"></div></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
