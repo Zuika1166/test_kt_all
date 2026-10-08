@@ -11,7 +11,7 @@
 ## Технологии
 
 - Java 21
-- Spring Boot 3.5.16
+- Spring Boot 3.5.15
 - Spring MVC
 - Java HttpClient
 - Jackson
