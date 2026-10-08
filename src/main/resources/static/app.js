@@ -244,7 +244,7 @@ async function loadHome() {
     }).join("") + '</div><h2 class="quick-title">Разделы</h2><div class="quick-grid">' +
         types.map(type => '<button type="button" class="quick-card" data-nav="' +
             type + '"><span>' + titles[type] + '</span><span>→</span></button>').join("") +
-        '</div><div class="notice">Данные загружаются из University API. Изменять и удалять можно только студентов своей команды.</div>';
+        '</div>';
 }
 
 async function loadList() {
